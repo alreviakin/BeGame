@@ -21,6 +21,7 @@ class TabBarController: UITabBarController {
     
     private func configure() {
         tabBar.backgroundColor = .white
+        tabBar.tintColor = R.Color.blue
         
         let controllers: [UINavigationController] = Tabs.allCases.map { tab in
             let controller = UINavigationController(rootViewController: getController(tab: tab))
@@ -28,6 +29,12 @@ class TabBarController: UITabBarController {
                 title: getBarTitle(tab: tab),
                 image: getBarImage(tab: tab),
                 tag: tab.rawValue)
+            switch tab {
+            case .main:
+                controller.navigationBar.prefersLargeTitles = true
+            case .play:
+                controller.navigationBar.prefersLargeTitles = false
+            }
             return controller
         }
         setViewControllers(controllers, animated: true)

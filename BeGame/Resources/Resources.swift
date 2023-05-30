@@ -9,8 +9,11 @@ import Foundation
 import UIKit
 
 enum R {
-    enum color {
-        
+    enum Color {
+        static let blue = UIColor(hexString: "#339DAA")
+        static let lightYellow = UIColor(hexString: "#EBC16D")
+        static let yellow = UIColor(hexString: "#FEBD3D")
+        static let darkYellow = UIColor(hexString: "#D99220")
     }
     
     enum TabBar {
