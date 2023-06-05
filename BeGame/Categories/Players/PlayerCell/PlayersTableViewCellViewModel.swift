@@ -18,12 +18,12 @@ class PlayersTableViewCellViewModel: PlayersTableViewCellViewModelProtocol {
     }
     
     var image: UIImage {
-        return player.image
+        return UIImage(data: player.image) ?? UIImage()
     }
     
-    var player: PlayerStruct
+    var player: Player
     
-    init(player: PlayerStruct) {
+    init(player: Player) {
         self.player = player
     }
 }
