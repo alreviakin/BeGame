@@ -49,7 +49,7 @@ class CoreDataPlayerManager {
         }
     }
     
-    public func updatePlayer(newName: String, username: String, image: Data) {
+    func updatePlayer(newName: String, username: String, image: Data) {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Player")
         do {
             guard let players = try? context.fetch(fetchRequest) as? [Player], let player = players.first(where: { $0.username == username }) else {return}
@@ -59,7 +59,16 @@ class CoreDataPlayerManager {
         appDelegate.saveContext()
     }
     
-    public func deletePlayer(username: String) {
+    func deleteAllPlayer() {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Player" )
+        do {
+            guard let players = try? context.fetch(fetchRequest) as? [Player] else { return }
+            players.forEach { context.delete($0) }
+        }
+        appDelegate.saveContext()
+    }
+    
+    func deletePlayer(username: String) {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Player")
         do {
             guard let players = try? context.fetch(fetchRequest) as? [Player], let player = players.first(where: {$0.username == username}) else {return}
