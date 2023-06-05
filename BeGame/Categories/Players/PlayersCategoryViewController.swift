@@ -8,12 +8,15 @@
 import Foundation
 import UIKit
 
+protocol PlayersCategoryViewControllerDelegate: AnyObject {
+    func savePlayer(player: PlayerStruct)
+}
+
 class PlayersCategoryViewController: BaseCategoryViewController {
     var viewModel: PlayersCategoryViewControllerViewModelProtocol?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
     }
     
     override func configure() {
@@ -51,6 +54,17 @@ extension PlayersCategoryViewController {
 extension PlayersCategoryViewController {
     override func addItem() {
         let vc = AddPlayerViewController()
+        vc.delegate = self
         present(vc, animated: true)
     }
+}
+
+//MARK: - PlayersCategoryViewControllerDelegate
+extension PlayersCategoryViewController: PlayersCategoryViewControllerDelegate {
+    func savePlayer(player: PlayerStruct) {
+        viewModel?.savePlayer(player: player)
+        tableView.reloadData()
+    }
+    
+    
 }

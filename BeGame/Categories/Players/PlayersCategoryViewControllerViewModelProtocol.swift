@@ -8,8 +8,9 @@
 import Foundation
 
 protocol PlayersCategoryViewControllerViewModelProtocol {
-    var players: [PlayerStruct] { get }
+    var players: [Player] { get }
     func numberOfRows() -> Int
     func cellViewModel(for indexPath: IndexPath) -> PlayersTableViewCellViewModelProtocol?
     func isLastCell(for indexPath: IndexPath) -> Bool
+    func savePlayer(player: PlayerStruct) 
 }
