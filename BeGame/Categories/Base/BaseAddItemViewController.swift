@@ -12,7 +12,7 @@ import PhotosUI
 
 class BaseAddItemViewController: UIViewController {
     var isPhotoLayoutRemake = false
-    var imageItem: UIImage?
+    var imageItem: UIImage? = UIImage(named: "pet")
     lazy var imageButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "pet"), for: .normal)
@@ -97,8 +97,16 @@ class BaseAddItemViewController: UIViewController {
             make.height.equalTo(30)
         }
     }
+    
+    func presentAlert(with title: String) {
+        let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
+        let action = UIAlertAction(title: "Ок", style: .cancel)
+        alert.addAction(action)
+        present(alert, animated: true)
+    }
 }
 
+//MARK: - Actions
 @objc extension BaseAddItemViewController {
     func addItem(){
         let group = DispatchGroup()
@@ -127,6 +135,7 @@ class BaseAddItemViewController: UIViewController {
     }
 }
 
+//MARK: - PHPickerViewControllerDelegate
 extension BaseAddItemViewController: PHPickerViewControllerDelegate {
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
         picker.dismiss(animated: true)
@@ -167,6 +176,7 @@ extension BaseAddItemViewController: PHPickerViewControllerDelegate {
     }
 }
 
+//MARK: - UITextFieldDelegate
 extension BaseAddItemViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
