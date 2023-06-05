@@ -19,12 +19,12 @@ class GamesTableViewCellViewModel: GamesTableViewCellViewModelProtocol {
     }
     
     var image: UIImage {
-        return game.image
+        return UIImage(data: game.image) ?? UIImage()
     }
     
-    var game: GameStruct
+    var game: Game
     
-    init(game: GameStruct) {
+    init(game: Game) {
         self.game = game
     }
 }

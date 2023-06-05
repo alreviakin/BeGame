@@ -16,9 +16,9 @@ extension Game {
         return NSFetchRequest<Game>(entityName: "Game")
     }
 
-    @NSManaged public var image: Data?
-    @NSManaged public var name: String?
-    @NSManaged public var type: String?
+    @NSManaged public var image: Data
+    @NSManaged public var name: String
+    @NSManaged public var type: String
 
 }
 

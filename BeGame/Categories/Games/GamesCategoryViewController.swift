@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol GamesCategoryViewControllerDelegate: AnyObject {
+    func saveGame(game: GameStruct)
+}
+
 final class GamesCategoryViewController: BaseCategoryViewController {
     var viewModel: GamesCategoryViewControllerViewModelProtocol?
     
@@ -45,6 +49,14 @@ extension GamesCategoryViewController {
 extension GamesCategoryViewController {
     override func addItem() {
         let vc = AddGameViewController()
+        vc.delegate = self
         present(vc, animated: true)
+    }
+}
+
+extension GamesCategoryViewController: GamesCategoryViewControllerDelegate {
+    func saveGame(game: GameStruct) {
+        viewModel?.saveGame(game: game)
+        tableView.reloadData()
     }
 }

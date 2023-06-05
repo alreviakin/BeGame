@@ -10,14 +10,7 @@ import UIKit
 
 class GamesCategoryViewControllerViewModel: GamesCategoryViewControllerViewModelProtocol {
     
-    var games: [GameStruct] = [
-        GameStruct(name: "Name", image: UIImage(named: "cat2")!, type: .card),
-        GameStruct(name: "Name", image: UIImage(named: "cat2")!, type: .card),
-        GameStruct(name: "Name", image: UIImage(named: "cat2")!, type: .card),
-        GameStruct(name: "Name", image: UIImage(named: "cat2")!, type: .card),
-        GameStruct(name: "Name", image: UIImage(named: "cat2")!, type: .card),
-        GameStruct(name: "Name", image: UIImage(named: "cat2")!, type: .card)
-    ]
+    var games: [Game] = CoreDataGameManager.shared.fetchGames()
     
     func numberOfRow() -> Int {
         return games.count
@@ -29,6 +22,14 @@ class GamesCategoryViewControllerViewModel: GamesCategoryViewControllerViewModel
     
     func isLastCell(for indexPath: IndexPath) -> Bool {
         return indexPath.row == games.count - 1
+    }
+    
+    func saveGame(game: GameStruct) {
+        guard let image = game.image.pngData() else { return }
+        CoreDataGameManager.shared.createGame(name: game.name,
+                                              type: game.type.rawValue,
+                                              image: image)
+        games = CoreDataGameManager.shared.fetchGames()
     }
     
     
