@@ -94,6 +94,16 @@ extension MainController: UITableViewDataSource {
 
 //MARK: UITableViewDelegate
 extension MainController: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row == 1 {
+            let vc = GamesCategoryViewController()
+            vc.viewModel = GamesCategoryViewControllerViewModel()
+            navigationController?.pushViewController(vc, animated: true)
+        } else {
+            let vc = PlayersCategoryViewController()
+            vc.viewModel = PlayersCategoryViewControllerViewModel()
+            navigationController?.pushViewController(vc, animated: true)
+        }
+    }
 }
 

@@ -6,5 +6,11 @@
 //
 
 import Foundation
+import UIKit
 
-class AddGameViewController
+class AddGameViewController: BaseAddItemViewController {
+    override func configure() {
+        super.configure()
+        titleLabel.text = "Игра"
+    }
+}

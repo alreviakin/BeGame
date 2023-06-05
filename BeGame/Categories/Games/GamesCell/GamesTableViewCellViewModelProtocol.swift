@@ -6,3 +6,10 @@
 //
 
 import Foundation
+import UIKit
+
+protocol GamesTableViewCellViewModelProtocol {
+    var name: String { get }
+    var description: String { get }
+    var image: UIImage { get }
+}

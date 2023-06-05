@@ -7,23 +7,44 @@
 
 import UIKit
 
-class GamesCategoryViewController: UIViewController {
-
+final class GamesCategoryViewController: BaseCategoryViewController {
+    var viewModel: GamesCategoryViewControllerViewModelProtocol?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    override func configure() {
+        super.configure()
+        tableView.register(GamesTableViewCell.self, forCellReuseIdentifier: "cell")
+        navigationItem.title = "Игры"
+        
     }
-    */
+}
 
+extension GamesCategoryViewController {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return viewModel?.numberOfRow() ?? 0
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? GamesTableViewCell,
+              let viewModel else { return UITableViewCell()}
+        if viewModel.isLastCell(for: indexPath) {
+            cell.separator.isHidden = true
+        }
+        let cellViewModel = viewModel.cellViewModel(for: indexPath)
+        cell.viewModel = cellViewModel
+        return cell
+    }
+}
+
+
+//MARK: - Transition
+extension GamesCategoryViewController {
+    override func addItem() {
+        let vc = AddGameViewController()
+        present(vc, animated: true)
+    }
 }

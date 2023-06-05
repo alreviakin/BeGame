@@ -48,7 +48,7 @@ class CounterCollectionViewCellViewModel: CounterCollectionViewCellViewModelProt
         }
     }
     
-    public var counter: Counter
+    var counter: Counter
     
     init(counter: Counter) {
         self.counter = counter

@@ -14,6 +14,9 @@ enum R {
         static let lightYellow = UIColor(hexString: "#EBC16D")
         static let yellow = UIColor(hexString: "#FEBD3D")
         static let darkYellow = UIColor(hexString: "#D99220")
+        
+        static let brown = UIColor(hexString: "#CA8C5D")
+        static let separator = UIColor(hexString: "#333333", alpha: 0.3)
     }
     
     enum TabBar {

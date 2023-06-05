@@ -6,3 +6,51 @@
 //
 
 import Foundation
+import UIKit
+
+class PlayersCategoryViewController: BaseCategoryViewController {
+    var viewModel: PlayersCategoryViewControllerViewModelProtocol?
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+    }
+    
+    override func configure() {
+        super.configure()
+        tableView.register(PlayersTableViewCell.self, forCellReuseIdentifier: "cell")
+        navigationItem.title = "Игроки"
+        
+    }
+}
+
+//MARK: - TableViewDataSource
+extension PlayersCategoryViewController {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return viewModel?.numberOfRows() ?? 0
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? PlayersTableViewCell,
+         let viewModel else { return UITableViewCell() }
+        if viewModel.isLastCell(for: indexPath) {
+            cell.separator.isHidden = true
+        }
+        let cellViewModel = viewModel.cellViewModel(for: indexPath)
+        cell.viewModel = cellViewModel
+        return cell
+    }
+}
+
+//MARK: - TableViewDelegate
+extension PlayersCategoryViewController {
+    
+}
+
+//MARK: - Actions
+extension PlayersCategoryViewController {
+    override func addItem() {
+        let vc = AddPlayerViewController()
+        present(vc, animated: true)
+    }
+}
