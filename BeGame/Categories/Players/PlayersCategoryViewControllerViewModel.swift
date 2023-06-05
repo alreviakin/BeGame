@@ -17,7 +17,6 @@ class PlayersCategoryViewControllerViewModel: PlayersCategoryViewControllerViewM
     }
     
     func cellViewModel(for indexPath: IndexPath) -> PlayersTableViewCellViewModelProtocol? {
-        let player = players[indexPath.row]
         return PlayersTableViewCellViewModel(player: players[indexPath.row])
     }
     
