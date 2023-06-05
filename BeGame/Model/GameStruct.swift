@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-struct Game {
+struct GameStruct {
     var name: String
     var image: UIImage
     var type: GameType
