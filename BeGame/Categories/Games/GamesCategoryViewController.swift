@@ -16,7 +16,6 @@ final class GamesCategoryViewController: BaseCategoryViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
     }
     
     override func configure() {
@@ -35,9 +34,6 @@ extension GamesCategoryViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? GamesTableViewCell,
               let viewModel else { return UITableViewCell()}
-        if viewModel.isLastCell(for: indexPath) {
-            cell.separator.isHidden = true
-        }
         let cellViewModel = viewModel.cellViewModel(for: indexPath)
         cell.viewModel = cellViewModel
         return cell
