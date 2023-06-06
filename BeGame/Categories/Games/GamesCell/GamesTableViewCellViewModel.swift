@@ -15,7 +15,7 @@ class GamesTableViewCellViewModel: GamesTableViewCellViewModelProtocol {
     }
     
     var description: String {
-        return "Description"
+        return game.type
     }
     
     var image: UIImage {

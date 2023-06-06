@@ -9,11 +9,11 @@ import Foundation
 
 enum GameType : String{
 //    case cooperativeWithCharacter
-    case cooperative
+    case cooperative = "Кооператив"
 //    case duelWithCharacter
-    case duel
-    case scoring
-    case card
-    case withHiddenCharacter
-    case paty
+    case duel = "Дуэль"
+    case scoring = "Набор очков"
+    case card = "Карточные"
+    case withHiddenCharacter = "Скрытая роль"
+    case paty = "Пати"
 }

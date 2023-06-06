@@ -12,7 +12,7 @@ class AddGamesViewModel: AddGamesViewModelProtocol {
     
     var lastIndexPath: IndexPath?
     
-    var gameTypes: [String] = ["Кооператив", "Дуэль","Пати","Карточные","Набор очков","Скрытая роль",]
+    var gameTypes: [String] = ["Кооператив", "Дуэль","Пати","Карточные","Набор очков","Скрытая роль"]
     
     func getString(for indexPath: IndexPath) -> String {
         gameTypes[indexPath.row]
