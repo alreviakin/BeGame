@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class GamesTableViewCell: BaseCategoryTableViewCell {
+class GameTableViewCell: BaseCategoryTableViewCell {
     private var countGameLabel: UILabel = {
        let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 13, weight: .light)
@@ -17,7 +17,7 @@ class GamesTableViewCell: BaseCategoryTableViewCell {
         return label
     }()
     
-    var viewModel: GamesTableViewCellViewModelProtocol? {
+    var viewModel: GameTableViewCellViewModelProtocol? {
         didSet {
             guard let viewModel else { return }
             nameLabel.text = viewModel.name

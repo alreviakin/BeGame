@@ -20,7 +20,7 @@ final class GamesCategoryViewController: BaseCategoryViewController {
     
     override func configure() {
         super.configure()
-        tableView.register(GamesTableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(GameTableViewCell.self, forCellReuseIdentifier: "cell")
         navigationItem.title = "Игры"
         
     }
@@ -32,7 +32,7 @@ extension GamesCategoryViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? GamesTableViewCell,
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? GameTableViewCell,
               let viewModel else { return UITableViewCell()}
         let cellViewModel = viewModel.cellViewModel(for: indexPath)
         cell.viewModel = cellViewModel

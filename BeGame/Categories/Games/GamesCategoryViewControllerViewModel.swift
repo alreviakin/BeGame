@@ -16,8 +16,8 @@ class GamesCategoryViewControllerViewModel: GamesCategoryViewControllerViewModel
         return games.count
     }
     
-    func cellViewModel(for indexPath: IndexPath) -> GamesTableViewCellViewModelProtocol? {
-        return GamesTableViewCellViewModel(game: games[indexPath.row])
+    func cellViewModel(for indexPath: IndexPath) -> GameTableViewCellViewModelProtocol? {
+        return GameTableViewCellViewModel(game: games[indexPath.row])
     }
     
     func isLastCell(for indexPath: IndexPath) -> Bool {

@@ -10,7 +10,7 @@ import Foundation
 protocol GamesCategoryViewControllerViewModelProtocol {
     var games: [Game] { get }
     func numberOfRow() -> Int
-    func cellViewModel(for indexPath: IndexPath) -> GamesTableViewCellViewModelProtocol?
+    func cellViewModel(for indexPath: IndexPath) -> GameTableViewCellViewModelProtocol?
     func isLastCell(for indexPath: IndexPath) -> Bool
     func saveGame(game: GameStruct)
 }

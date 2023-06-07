@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-protocol GamesTableViewCellViewModelProtocol {
+protocol GameTableViewCellViewModelProtocol {
     var name: String { get }
     var description: String { get }
     var image: UIImage { get }

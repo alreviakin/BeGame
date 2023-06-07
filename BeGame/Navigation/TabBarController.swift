@@ -45,7 +45,7 @@ class TabBarController: UITabBarController {
         case .main:
             return MainController()
         case .play:
-            return PlayController()
+            return GameSelectionTableViewController()
         }
     }
     

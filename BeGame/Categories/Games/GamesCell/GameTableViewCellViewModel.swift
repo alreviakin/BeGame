@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 
-class GamesTableViewCellViewModel: GamesTableViewCellViewModelProtocol {
+class GameTableViewCellViewModel: GameTableViewCellViewModelProtocol {
     var name: String {
         return game.name
     }
