@@ -21,7 +21,7 @@ class AddPlayerViewController: BaseAddItemViewController {
 
 extension AddPlayerViewController {
     override func save() {
-        guard let name = nameTextField.text, let image = imageItem else {
+        guard let name = nameTextField.text, !name.isEmpty, let image = imageItem else {
             presentAlert(with: "Введите имя!")
             return
         }
