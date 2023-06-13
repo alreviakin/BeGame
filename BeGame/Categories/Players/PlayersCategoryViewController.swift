@@ -21,7 +21,7 @@ class PlayersCategoryViewController: BaseCategoryViewController {
     
     override func configure() {
         super.configure()
-        tableView.register(PlayersTableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(PlayerTableViewCell.self, forCellReuseIdentifier: "cell")
         navigationItem.title = "Игроки"
         
     }
@@ -34,7 +34,7 @@ extension PlayersCategoryViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? PlayersTableViewCell,
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? PlayerTableViewCell,
          let viewModel else { return UITableViewCell() }
         if viewModel.isLastCell(for: indexPath) {
             cell.separator.isHidden = true

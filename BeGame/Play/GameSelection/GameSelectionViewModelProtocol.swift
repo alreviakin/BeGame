@@ -9,4 +9,5 @@ import Foundation
 
 protocol GameSelectionViewModelProtocol {
     func updateGame()
+    func getPlayerSelectViewModel(for indexPath: IndexPath) -> PlayerSelectionViewModel
 }

@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-protocol PlayersTableViewCellViewModelProtocol {
+protocol PlayerTableViewCellViewModelProtocol {
     var name: String { get }
     var countGame: String { get }
     var image: UIImage { get }

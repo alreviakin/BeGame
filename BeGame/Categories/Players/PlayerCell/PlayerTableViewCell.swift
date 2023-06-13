@@ -7,8 +7,8 @@
 
 import Foundation
 
-class PlayersTableViewCell: BaseCategoryTableViewCell {
-    var viewModel: PlayersTableViewCellViewModelProtocol? {
+class PlayerTableViewCell: BaseCategoryTableViewCell {
+    var viewModel: PlayerTableViewCellViewModelProtocol? {
         didSet {
             guard let viewModel else { return }
             nameLabel.text = viewModel.name

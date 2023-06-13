@@ -16,7 +16,7 @@ class GamesCategoryViewControllerViewModel: GamesCategoryViewControllerViewModel
         return games.count
     }
     
-    func cellViewModel(for indexPath: IndexPath) -> GameTableViewCellViewModelProtocol? {
+    func getCellViewModel(for indexPath: IndexPath) -> GameTableViewCellViewModelProtocol? {
         return GameTableViewCellViewModel(game: games[indexPath.row])
     }
     

@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class PlayersTableViewCellViewModel: PlayersTableViewCellViewModelProtocol {
+class PlayerTableViewCellViewModel: PlayerTableViewCellViewModelProtocol {
     var name: String {
         return player.name
     }

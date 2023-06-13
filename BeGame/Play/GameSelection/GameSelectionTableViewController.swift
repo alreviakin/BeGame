@@ -11,11 +11,6 @@ import UIKit
 class GameSelectionTableViewController: BasePlayTableViewController{
     var viewModel: GameSelectionViewModel = GameSelectionViewModel()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
-    
     override func viewWillAppear(_ animated: Bool) {
         viewModel.updateGame()
         tableView.reloadData()
@@ -28,6 +23,7 @@ class GameSelectionTableViewController: BasePlayTableViewController{
     }
 }
 
+//MARK: UITableViewDataSource
 extension GameSelectionTableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.numberOfRow()
@@ -37,8 +33,18 @@ extension GameSelectionTableViewController {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? GameTableViewCell else {
             return UITableViewCell()
         }
-        let cellViewModel = viewModel.cellViewModel(for: indexPath)
+        let cellViewModel = viewModel.getCellViewModel(for: indexPath)
         cell.viewModel = cellViewModel
         return cell
+    }
+}
+
+//MARK: - Transition
+extension GameSelectionTableViewController {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let playerSelectViewModel = viewModel.getPlayerSelectViewModel(for: indexPath)
+        let playerSelectionTableViewController = PlayerSelectionTableViewController()
+        playerSelectionTableViewController.viewModel = playerSelectViewModel
+        navigationController?.pushViewController(playerSelectionTableViewController, animated: true)
     }
 }

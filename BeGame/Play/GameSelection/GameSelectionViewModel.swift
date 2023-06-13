@@ -12,4 +12,7 @@ class GameSelectionViewModel: GamesCategoryViewControllerViewModel,GameSelection
         games = CoreDataGameManager.shared.fetchGames()
     }
     
+    func getPlayerSelectViewModel(for indexPath: IndexPath) -> PlayerSelectionViewModel {
+        return PlayerSelectionViewModel(game: games[indexPath.row])
+    }
 }

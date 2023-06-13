@@ -34,7 +34,7 @@ extension GamesCategoryViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? GameTableViewCell,
               let viewModel else { return UITableViewCell()}
-        let cellViewModel = viewModel.cellViewModel(for: indexPath)
+        let cellViewModel = viewModel.getCellViewModel(for: indexPath)
         cell.viewModel = cellViewModel
         return cell
     }
