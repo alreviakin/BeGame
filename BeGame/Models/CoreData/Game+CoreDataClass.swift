@@ -2,7 +2,7 @@
 //  Game+CoreDataClass.swift
 //  BeGame
 //
-//  Created by Алексей Ревякин on 02.06.2023.
+//  Created by Алексей Ревякин on 14.06.2023.
 //
 //
 

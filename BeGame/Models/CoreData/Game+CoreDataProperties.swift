@@ -2,7 +2,7 @@
 //  Game+CoreDataProperties.swift
 //  BeGame
 //
-//  Created by Алексей Ревякин on 02.06.2023.
+//  Created by Алексей Ревякин on 14.06.2023.
 //
 //
 
@@ -19,6 +19,8 @@ extension Game {
     @NSManaged public var image: Data
     @NSManaged public var name: String
     @NSManaged public var type: String
+    @NSManaged public var isCharacter: Bool
+    @NSManaged public var characters: [String]?
 
 }
 
