@@ -22,12 +22,14 @@ class CoreDataGameManager {
         appDelegate.persistentContainer.viewContext
     }
     
-    func createGame(name: String, type: String, image: Data) {
+    func createGame(name: String, type: String, image: Data, isCharacter: Bool, characters: [String]?) {
         guard let gameEntityDescription = NSEntityDescription.entity(forEntityName: "Game", in: context) else { return }
         let game = Game(entity: gameEntityDescription, insertInto: context)
         game.name = name
         game.image = image
         game.type = type
+        game.isCharacter = isCharacter
+        game.characters = characters
         
         appDelegate.saveContext()
     }
