@@ -6,3 +6,10 @@
 //
 
 import Foundation
+import UIKit
+
+protocol PlayGameCollectionViewCellViewModelProtocol {
+    var nameLabel: String { get }
+    var images: [UIImage] { get }
+    var isTimerPlay: Bool { get set }
+}

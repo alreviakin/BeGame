@@ -6,3 +6,20 @@
 //
 
 import Foundation
+import UIKit
+
+class PlayGameCollectionViewCellViewModel: PlayGameCollectionViewCellViewModelProtocol {
+    
+    var isTimerPlay: Bool = true
+    
+    var isFirstSet: Bool = true
+    
+    var nameLabel: String
+    
+    var images: [UIImage]
+    
+    init(nameLabel: String, images: [UIImage]) {
+        self.nameLabel = nameLabel
+        self.images = images
+    }
+}
