@@ -16,4 +16,8 @@ class PlayGameViewModel: PlayGameViewModelProtocol {
         self.game = game
         self.players = players
     }
+    
+    func getGameImage() -> Data {
+        return game.image
+    }
 }

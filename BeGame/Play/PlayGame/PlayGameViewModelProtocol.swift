@@ -9,6 +9,12 @@ import Foundation
 
 protocol PlayGameViewModelProtocol {
     var game: Game { get }
+    
     var players: [Player] { get }
+    
     init(game: Game, players: [Player])
+    
+    func getGameImage() -> Data
+    
+//    func 
 }
