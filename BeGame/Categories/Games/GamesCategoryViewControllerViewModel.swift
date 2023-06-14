@@ -28,7 +28,9 @@ class GamesCategoryViewControllerViewModel: GamesCategoryViewControllerViewModel
         guard let image = game.image.pngData() else { return }
         CoreDataGameManager.shared.createGame(name: game.name,
                                               type: game.type.rawValue,
-                                              image: image)
+                                              image: image,
+                                              isCharacter: false,
+                                              characters: nil)
         games = CoreDataGameManager.shared.fetchGames()
     }
     
