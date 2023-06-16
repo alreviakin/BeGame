@@ -16,12 +16,12 @@ extension GameHistory {
         return NSFetchRequest<GameHistory>(entityName: "GameHistory")
     }
 
-    @NSManaged public var date: Date?
-    @NSManaged public var game: NSObject?
+    @NSManaged public var date: Date
+    @NSManaged public var game: Game
     @NSManaged public var isWin: Bool
-    @NSManaged public var players: NSObject?
-    @NSManaged public var playerWin: NSObject?
-    @NSManaged public var scoredPoints: NSObject?
+    @NSManaged public var players: [Player]
+    @NSManaged public var playerWin: Player?
+    @NSManaged public var scoredPoints: [Player: Int]?
     @NSManaged public var time: Int32
 
 }
