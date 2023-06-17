@@ -6,7 +6,6 @@
 //
 
 import UIKit
-
 class PlayGameViewController: UIViewController {
     private var appDidEnterBackgroundDate: Date?
     
@@ -43,8 +42,9 @@ class PlayGameViewController: UIViewController {
     private lazy var playerTableView: UITableView = {
        let table = UITableView()
         table.dataSource = self
-        table.delegate = self
         table.isScrollEnabled = false
+        table.delegate = self
+        table.register(PlayGameTableViewCell.self, forCellReuseIdentifier: "tableCell")
         return table
     }()
 
@@ -54,8 +54,14 @@ class PlayGameViewController: UIViewController {
     }
 
     override func viewDidAppear(_ animated: Bool) {
-        scrollView.contentSize = scrollView.intrinsicContentSize
-    }
+        var height: CGFloat = 10 + (navigationController?.navigationBar.bounds.height ?? 0)
+        for numberView in 0..<(scrollView.subviews.count - 2) {
+            height += scrollView.subviews[numberView].frame.height
+            print(scrollView.subviews[numberView].frame.height)
+        }
+        height += CGFloat((viewModel?.numberOfRowsTable() ?? 0) * 60)
+        scrollView.contentSize = CGSize(width: view.bounds.width, height: height)
+     }
 
     private func configure() {
         view.backgroundColor = .white
@@ -64,6 +70,7 @@ class PlayGameViewController: UIViewController {
         view.addSubview(scrollView)
         scrollView.addSubview(gameImageView)
         scrollView.addSubview(collection)
+        scrollView.addSubview(playerTableView)
         createTimer()
         NotificationCenter.default.addObserver(self, selector: #selector(applicationDidEnterBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(applicationWillEnterBackground), name: UIApplication.willEnterForegroundNotification, object: nil)
@@ -76,7 +83,7 @@ class PlayGameViewController: UIViewController {
             make.edges.equalToSuperview()
         }
         gameImageView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(7)
+            make.top.equalToSuperview().offset(10)
             make.width.height.equalTo(view.bounds.width * 0.33)
             make.centerX.equalToSuperview()
         }
@@ -86,17 +93,33 @@ class PlayGameViewController: UIViewController {
             make.right.equalTo(view).offset(-40)
             make.height.equalTo(80)
         }
+        playerTableView.snp.makeConstraints { make in
+            make.top.equalTo(collection.snp.bottom).offset(20)
+            make.left.equalTo(view)
+            make.right.equalTo(view)
+            make.bottom.equalTo(view)
+        }
     }
 }
 
 //MARK: - UITableViewDataSource
 extension PlayGameViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel?.numberOfRows() ?? 0
+        return viewModel?.numberOfRowsTable() ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        guard let cellViewModel = viewModel?.getPlayGameTableViewCellViewModel(for: indexPath),
+              let cell = tableView.dequeueReusableCell(withIdentifier: "tableCell", for: indexPath) as? PlayGameTableViewCell else {
+            return UITableViewCell()
+        }
+        cell.viewModel = cellViewModel
+        cell.textField.tag = indexPath.row
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60
     }
 }
 
@@ -131,7 +154,6 @@ extension PlayGameViewController: UICollectionViewDelegate {
         } else {
             timer?.invalidate()
             timer = nil
-            
         }
     }
 }

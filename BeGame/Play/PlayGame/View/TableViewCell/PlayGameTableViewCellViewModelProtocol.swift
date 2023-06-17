@@ -8,5 +8,17 @@
 import Foundation
 
 protocol PlayGameTableViewCellViewModelProtocol {
+    var namePlayer: String { get }
     
+    var character: String? { get }
+    
+    var gameType: String? { get }
+    
+    var points: Int? { get }
+    
+    var acceptableSymbolsArr: [String] { get }
+    
+    func setGameType(gameType: String) 
+    
+    func setCharacter(character: String) 
 }

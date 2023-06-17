@@ -30,10 +30,8 @@ class PlayGameViewModel: PlayGameViewModelProtocol {
     func getGameImage() -> Data {
         return game.image
     }
-    
-    func numberOfRows() -> Int {
-        return players.count
-    }
+        
+    //MARK: - Collection
     
     func updateTime() -> String {
         countTime += 1
@@ -77,5 +75,17 @@ class PlayGameViewModel: PlayGameViewModelProtocol {
         let dateFormater = DateFormatter()
         dateFormater.dateFormat = "dd.MM.yy"
         return dateFormater.string(from: date)
+    }
+    
+    //MARK: - Table
+    
+    func numberOfRowsTable() -> Int {
+        return players.count
+    }
+    
+    func getPlayGameTableViewCellViewModel(for indexPath: IndexPath) -> PlayGameTableViewCellViewModelProtocol {
+        var cellViewModel = PlayGameTableViewCellViewModel(namePlayer: players[indexPath.row ].name)
+        cellViewModel.setGameType(gameType: game.type)
+        return cellViewModel
     }
 }

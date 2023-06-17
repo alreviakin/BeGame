@@ -16,13 +16,19 @@ protocol PlayGameViewModelProtocol {
     
     init(game: Game, players: [Player])
     
-    func getGameImage() -> Data
+    //MARK: - Collection
     
-    func numberOfRows() -> Int
+    func getGameImage() -> Data
     
     func updateTime() -> String
     
     func addTime(seconds: Int)
     
     func getPlayGameCollectionViewCellViewModel(for indexPath: IndexPath) -> PlayGameCollectionViewCellViewModel
+    
+    //MARK: - Table
+    
+    func numberOfRowsTable() -> Int
+    
+    func getPlayGameTableViewCellViewModel(for indexPath: IndexPath) -> PlayGameTableViewCellViewModelProtocol
 }
