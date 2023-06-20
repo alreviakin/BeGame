@@ -74,7 +74,16 @@ class PlayGameTableViewCell: UITableViewCell {
 
 extension PlayGameTableViewCell: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        guard let viewModel else { return false }
+        guard let viewModel, let textTextField = textField.text else { return false }
+        if textTextField == "0" && string != "" {
+            textField.text = ""
+        }
         return viewModel.acceptableSymbolsArr.contains(string)
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if textField.text == "" {
+            textField.text = "0"
+        }
     }
 }

@@ -14,6 +14,12 @@ protocol PlayGameViewModelProtocol {
     
     var players: [Player] { get }
     
+    var isWin: Bool { get set }
+    
+    var playerWin: Player? { get }
+    
+    var scoredPoints: [String: Int32]? { get }
+    
     init(game: Game, players: [Player])
     
     //MARK: - Collection
@@ -31,4 +37,8 @@ protocol PlayGameViewModelProtocol {
     func numberOfRowsTable() -> Int
     
     func getPlayGameTableViewCellViewModel(for indexPath: IndexPath) -> PlayGameTableViewCellViewModelProtocol
+    
+    //MARK: - CoreData
+    
+    func getGameHistoryStruct() -> GameHistoryStruct
 }

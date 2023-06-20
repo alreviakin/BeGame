@@ -9,6 +9,11 @@ import Foundation
 import UIKit
 
 class PlayGameViewModel: PlayGameViewModelProtocol {
+    
+    var scoredPoints: [String : Int32]?
+    
+    var playerWin: Player?
+    
     var game: Game
     
     var collectionImages: [UIImage] = [
@@ -20,6 +25,8 @@ class PlayGameViewModel: PlayGameViewModelProtocol {
     var countTime: Int
     
     var players: [Player]
+    
+    var isWin: Bool = false
     
     required init(game: Game, players: [Player]) {
         self.game = game
@@ -64,17 +71,10 @@ class PlayGameViewModel: PlayGameViewModelProtocol {
             images.append(collectionImages[1])
             return PlayGameCollectionViewCellViewModel(nameLabel: "0s", images: images)
         case 1:
-            return PlayGameCollectionViewCellViewModel(nameLabel: getCurrentDate(), images: [collectionImages[2]])
+            return PlayGameCollectionViewCellViewModel(nameLabel: DateManager.shared.getCurrentDate(), images: [collectionImages[2]])
         default:
             return PlayGameCollectionViewCellViewModel(nameLabel: "", images: [])
         }
-    }
-    
-    private func getCurrentDate() -> String {
-        let date = Date()
-        let dateFormater = DateFormatter()
-        dateFormater.dateFormat = "dd.MM.yy"
-        return dateFormater.string(from: date)
     }
     
     //MARK: - Table
@@ -84,8 +84,23 @@ class PlayGameViewModel: PlayGameViewModelProtocol {
     }
     
     func getPlayGameTableViewCellViewModel(for indexPath: IndexPath) -> PlayGameTableViewCellViewModelProtocol {
-        var cellViewModel = PlayGameTableViewCellViewModel(namePlayer: players[indexPath.row ].name)
+        let cellViewModel = PlayGameTableViewCellViewModel(namePlayer: players[indexPath.row ].name)
         cellViewModel.setGameType(gameType: game.type)
         return cellViewModel
+    }
+    
+    func getGameHistoryStruct() -> GameHistoryStruct {
+        var playerUsernames: [String] = []
+        for player in players {
+            playerUsernames.append(player.username)
+        }
+        return GameHistoryStruct(
+            date: DateManager.shared.getCurrentDate(),
+            gameName: game.name,
+            isWin: isWin,
+            playerUsernames: playerUsernames,
+            playerWinUsername: playerWin?.username,
+            scoredPoints: scoredPoints,
+            time: Int32(countTime))
     }
 }

@@ -59,13 +59,14 @@ class PlayGameViewController: UIViewController {
             height += scrollView.subviews[numberView].frame.height
             print(scrollView.subviews[numberView].frame.height)
         }
-        height += CGFloat((viewModel?.numberOfRowsTable() ?? 0) * 60)
+        height += CGFloat((viewModel?.numberOfRowsTable() ?? 0) * 60) + (tabBarController?.tabBar.frame.height ?? 0)
         scrollView.contentSize = CGSize(width: view.bounds.width, height: height)
      }
 
     private func configure() {
         view.backgroundColor = .white
         navigationItem.title = viewModel?.game.name
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "закончить", style: .done, target: self, action: #selector(endGame))
         
         view.addSubview(scrollView)
         scrollView.addSubview(gameImageView)
@@ -189,5 +190,53 @@ extension PlayGameViewController {
         let difference = calendar.dateComponents([.second], from: previousDate, to: Date())
         let seconds = difference.second!
         viewModel?.addTime(seconds: seconds)
+    }
+}
+
+//MARK: - End playgame
+extension PlayGameViewController {
+    @objc private func endGame() {
+        switch GameType(rawValue: viewModel?.game.type ?? "") {
+        case .cooperative:
+            showAlert()
+        case .card:
+            changeBarButonItem()
+        case .duel:
+            changeBarButonItem()
+        case .paty:
+            changeBarButonItem()
+        case .scoring:
+            changeBarButonItem()
+        case .withHiddenCharacter:
+            changeBarButonItem()
+        default:
+            changeBarButonItem()
+        }
+    }
+    
+    func showAlert() {
+        let alert = UIAlertController(title: "Вы победили?", message: nil, preferredStyle: .alert)
+        let alertOkAction = UIAlertAction(title: "Да", style: .default) {_ in
+            self.changeBarButonItem()
+            self.viewModel?.isWin = true
+        }
+        let alertCancelAction = UIAlertAction(title: "Нет", style: .cancel) {_ in
+            self.changeBarButonItem()
+            self.viewModel?.isWin = false
+        }
+        alert.addAction(alertCancelAction)
+        alert.addAction(alertOkAction)
+        present(alert, animated: true)
+    }
+    
+    private func changeBarButonItem() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "сохранить", style: .done, target: self, action: #selector(saveGame))
+        timer?.invalidate()
+        timer = nil
+    }
+    
+    @objc private func saveGame() {
+        guard let viewModel else { return }
+        CoreDataGameHistoryManager.shared.createGameHistory(gameHistoryStruct: viewModel.getGameHistoryStruct())
     }
 }

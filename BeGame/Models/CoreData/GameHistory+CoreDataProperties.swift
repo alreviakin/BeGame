@@ -2,7 +2,7 @@
 //  GameHistory+CoreDataProperties.swift
 //  BeGame
 //
-//  Created by Алексей Ревякин on 02.06.2023.
+//  Created by Алексей Ревякин on 20.06.2023.
 //
 //
 
@@ -16,12 +16,12 @@ extension GameHistory {
         return NSFetchRequest<GameHistory>(entityName: "GameHistory")
     }
 
-    @NSManaged public var date: Date
-    @NSManaged public var game: Game
+    @NSManaged public var date: Date?
+    @NSManaged public var gameName: String?
     @NSManaged public var isWin: Bool
-    @NSManaged public var players: [Player]
-    @NSManaged public var playerWin: Player?
-    @NSManaged public var scoredPoints: [Player: Int]?
+    @NSManaged public var playerUsernames: [String]?
+    @NSManaged public var playerWinUsername: String?
+    @NSManaged public var scoredPoints: [String : Int32]?
     @NSManaged public var time: Int32
 
 }

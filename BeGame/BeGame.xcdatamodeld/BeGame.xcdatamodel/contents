@@ -9,10 +9,10 @@
     </entity>
     <entity name="GameHistory" representedClassName="GameHistory" syncable="YES">
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="game" optional="YES" attributeType="Transformable"/>
+        <attribute name="gameName" optional="YES" attributeType="String"/>
         <attribute name="isWin" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
-        <attribute name="players" optional="YES" attributeType="Transformable"/>
-        <attribute name="playerWin" optional="YES" attributeType="Transformable"/>
+        <attribute name="playerUsernames" optional="YES" attributeType="Transformable"/>
+        <attribute name="playerWinUsername" optional="YES" attributeType="String"/>
         <attribute name="scoredPoints" optional="YES" attributeType="Transformable"/>
         <attribute name="time" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
