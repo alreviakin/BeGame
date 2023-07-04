@@ -61,7 +61,6 @@ class BaseCategoryTableViewCell: UITableViewCell {
         }
         descriptionLabel.snp.makeConstraints { make in
             make.left.equalTo(nameLabel.snp.left)
-            make.bottom.equalToSuperview().offset(-10)
         }
         separator.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(20)

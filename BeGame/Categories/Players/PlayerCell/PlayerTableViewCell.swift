@@ -19,10 +19,15 @@ class PlayerTableViewCell: BaseCategoryTableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        itemImageView.layer.cornerRadius = (contentView.bounds.height - 20) / 2
-        descriptionLabel.snp.remakeConstraints { make in
-            make.left.equalTo(nameLabel.snp.left)
+        descriptionLabel.snp.makeConstraints { make in
             make.bottom.equalToSuperview().offset(-20)
         }
+        itemImageView.layer.cornerRadius = (contentView.bounds.height - 20) / 2
+    }
+    
+    override func prepareForReuse() {
+        self.nameLabel.text = nil
+        self.itemImageView.image = nil
+        self.descriptionLabel.text = nil
     }
 }
