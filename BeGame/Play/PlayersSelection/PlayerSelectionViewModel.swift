@@ -46,4 +46,8 @@ class PlayerSelectionViewModel: PlayersCategoryViewControllerViewModel, PlayerSe
     func deleteAllSelectedPlayers() {
         selectedPlayers = []
     }
+    
+    func selectedPlayersIsEmpty() -> Bool {
+        return selectedPlayers.isEmpty
+    }
 }

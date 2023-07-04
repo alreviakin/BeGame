@@ -33,7 +33,7 @@ extension GameSelectionTableViewController {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? GameTableViewCell else {
             return UITableViewCell()
         }
-        let cellViewModel = viewModel.getCellViewModel(for: indexPath)
+        let cellViewModel = viewModel.getGameCellViewModel(for: indexPath)
         cell.viewModel = cellViewModel
         return cell
     }

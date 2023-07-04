@@ -25,4 +25,6 @@ protocol PlayerSelectionViewModelProtocol {
     func deleteSelectedPlayer(player: Player)
     
     func deleteAllSelectedPlayers()
+    
+    func selectedPlayersIsEmpty() -> Bool
 }

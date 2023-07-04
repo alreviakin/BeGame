@@ -51,9 +51,21 @@ extension PlayerSelectionTableViewController {
     }
     
     @objc func play() {
-        let playGameViewModel = viewModel?.getPlayGameViewModel()
+        guard let viewModel else { return }
+        if viewModel.selectedPlayersIsEmpty() {
+            showAlert()
+            return
+        }
+        let playGameViewModel = viewModel.getPlayGameViewModel()
         let playGameViewController = PlayGameViewController()
         playGameViewController.viewModel = playGameViewModel
         navigationController?.pushViewController(playGameViewController, animated: true)
+    }
+    
+    func showAlert() {
+        let alert = UIAlertController(title: "Выберите игроков", message: nil, preferredStyle: .alert)
+        let alertAction = UIAlertAction(title: "Ok", style: .cancel)
+        alert.addAction(alertAction)
+        present(alert, animated: true)
     }
 }

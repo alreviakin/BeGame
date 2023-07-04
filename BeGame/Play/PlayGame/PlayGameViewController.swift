@@ -57,7 +57,6 @@ class PlayGameViewController: UIViewController {
         var height: CGFloat = 10 + (navigationController?.navigationBar.bounds.height ?? 0)
         for numberView in 0..<(scrollView.subviews.count - 2) {
             height += scrollView.subviews[numberView].frame.height
-            print(scrollView.subviews[numberView].frame.height)
         }
         height += CGFloat((viewModel?.numberOfRowsTable() ?? 0) * 60) + (tabBarController?.tabBar.frame.height ?? 0)
         scrollView.contentSize = CGSize(width: view.bounds.width, height: height)
