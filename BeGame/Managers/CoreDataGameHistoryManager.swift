@@ -39,8 +39,6 @@ class CoreDataGameHistoryManager {
     func fetchGameHistories() -> [GameHistory]  {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "GameHistory")
         do {
-            let gameHistories = try? context.fetch(fetchRequest) as? [GameHistory]
-            print(gameHistories)
             return (try? context.fetch(fetchRequest) as? [GameHistory]) ?? []
         }
     }

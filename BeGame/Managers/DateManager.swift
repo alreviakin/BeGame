@@ -26,7 +26,6 @@ class DateManager {
     }
     
     func getCurrentDate() -> Date {
-        let date = Date()
         let dateFormater = DateFormatter()
         dateFormater.dateFormat = "dd.MM.yy"
         return stringToDate(dateString: getCurrentDate())
