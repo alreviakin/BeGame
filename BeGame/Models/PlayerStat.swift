@@ -11,6 +11,6 @@ struct PlayerStat {
     var playerName: String
     var countGame: Int
     var countWin: Int
-    var averagePoints: Int
+    var countPoints: Int
     var maxPoints: Int
 }
