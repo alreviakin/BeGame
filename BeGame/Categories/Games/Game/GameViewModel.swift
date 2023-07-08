@@ -28,7 +28,8 @@ class GameViewModel: GameViewModelProtocol {
         self.game = game
         gameHistory = CoreDataGameHistoryManager.shared.fetchGameHistories(game: game)
         gameType = game.type
-        getStats(gameType: .cooperative)
+        guard let gameTypeStruct = GameType(rawValue: gameType) else { return }
+        getStats(gameType: gameTypeStruct)
     }
     
     func numberOfRowsTable() -> Int {
@@ -36,7 +37,8 @@ class GameViewModel: GameViewModelProtocol {
     }
     
     func getTableCellViewModel(for indexPath: IndexPath) -> GameDetailTableViewCellViewModelProtocol? {
-        return GameDetailTableViewCellViewModel(playerStat: playerStats[indexPath.row])
+        guard let typeGame = GameType(rawValue: gameType) else { return nil}
+        return GameDetailTableViewCellViewModel(playerStat: playerStats[indexPath.row], typeGame: typeGame)
     }
     
     func getCollectionCellViewModel(for indexPath: IndexPath) -> GameCollectionCellViewModelProtocol? {
@@ -90,7 +92,7 @@ extension GameViewModel {
                 for playerUsername in playerUsernames {
                     guard let playerName = CoreDataPlayerManager.shared.fetchPlayer(username: playerUsername)?.name else { continue }
                     let countPoints = Int(game.scoredPoints?[playerUsername] ?? 0)
-                    let isWin = game.playerWinUsername == playerUsername
+                    let isWin = game.playerWinUsernames?.contains(playerUsername) ?? false
                     if playerStats.contains(where: { $0.playerName == playerName }) {
                         let existsPlayerIndex = playerStats.firstIndex(where: {$0.playerName == playerName})
                         guard let existsPlayerIndex else { continue }
@@ -117,6 +119,7 @@ extension GameViewModel {
                 }
             }
         default:
+            print(gameType)
             for game in gameHistory {
                 guard let playerUsernames = game.playerUsernames else { continue }
                 for playerUsername in playerUsernames {

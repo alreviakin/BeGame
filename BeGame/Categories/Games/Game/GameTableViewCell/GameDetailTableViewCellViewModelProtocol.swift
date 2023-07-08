@@ -13,4 +13,6 @@ protocol GameDetailTableViewCellViewModelProtocol {
     var countWinGame: String { get }
     var avaragePointGame: String { get }
     var bestPointGame: String { get }
+    
+    var typeGame: GameType { get }
 }

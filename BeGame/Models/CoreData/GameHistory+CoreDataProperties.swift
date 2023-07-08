@@ -2,7 +2,7 @@
 //  GameHistory+CoreDataProperties.swift
 //  BeGame
 //
-//  Created by Алексей Ревякин on 20.06.2023.
+//  Created by Алексей Ревякин on 08.07.2023.
 //
 //
 
@@ -19,9 +19,9 @@ extension GameHistory {
     @NSManaged public var date: Date?
     @NSManaged public var gameName: String?
     @NSManaged public var isWin: Bool
-    @NSManaged public var playerUsernames: [String]?
-    @NSManaged public var playerWinUsername: String?
-    @NSManaged public var scoredPoints: [String : Int32]?
+    @NSManaged public var playerUsernames: NSObject?
+    @NSManaged public var playerWinUsernames: NSObject?
+    @NSManaged public var scoredPoints: NSObject?
     @NSManaged public var time: Int32
 
 }

@@ -19,11 +19,14 @@ class GameDetailTableViewCellViewModel: GameDetailTableViewCellViewModelProtocol
     
     var bestPointGame: String
     
-    init(playerStat: PlayerStat) {
+    var typeGame: GameType
+    
+    init(playerStat: PlayerStat, typeGame: GameType) {
         namePlayer = playerStat.playerName
         countGame = "\(playerStat.countGame)"
         countWinGame = "\(Int(Float(playerStat.countWin) / Float(playerStat.countGame) * 100))"
         avaragePointGame = "\(playerStat.countPoints / playerStat.countGame)"
         bestPointGame = "\(playerStat.maxPoints)"
+        self.typeGame = typeGame
     }
 }

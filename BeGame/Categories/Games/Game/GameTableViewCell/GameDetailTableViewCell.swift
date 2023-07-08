@@ -20,4 +20,9 @@ final class GameDetailTableViewCell: BaseDetailTableViewCell {
             bestPointLabel.text = viewModel.bestPointGame
         }
     }
+    
+    override func configure() {
+        super.configure()
+        
+    }
 }
