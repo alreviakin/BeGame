@@ -26,6 +26,7 @@ final class GamesCategoryViewController: BaseCategoryViewController {
     }
 }
 
+//MARK: - UITableViewDataSource
 extension GamesCategoryViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel?.numberOfRow() ?? 0
@@ -34,12 +35,20 @@ extension GamesCategoryViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? GameTableViewCell,
               let viewModel else { return UITableViewCell()}
-        let cellViewModel = viewModel.getCellViewModel(for: indexPath)
+        let cellViewModel = viewModel.getGameCellViewModel(for: indexPath)
         cell.viewModel = cellViewModel
         return cell
     }
 }
 
+//MARK: - UITableViewDelegate
+extension GamesCategoryViewController {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = GameViewController()
+        vc.viewModel = viewModel?.getGameViewModel(for: indexPath)
+        navigationController?.pushViewController(vc, animated: true)
+    }
+}
 
 //MARK: - Transition
 extension GamesCategoryViewController {

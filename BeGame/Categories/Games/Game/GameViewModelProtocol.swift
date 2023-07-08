@@ -7,6 +7,17 @@
 
 import Foundation
 
-protocol GameViewModelProtocol {
+protocol GameViewModelProtocol: BaseDetailCategoryViewModelProtocol {
+    var game: Game { get }
     
+    var gameType: String { get }
+    
+    var playerStats: [PlayerStat] { get }
+    
+    var gameHistory: [GameHistory]? { get }
+    
+    func numberOfRowsTable() -> Int 
+    func getCollectionCellViewModel(for indexPath: IndexPath) -> GameCollectionCellViewModelProtocol?
+    func getStats(gameType: GameType)
+    func getTableCellViewModel(for indexPath: IndexPath) -> GameDetailTableViewCellViewModelProtocol?
 }

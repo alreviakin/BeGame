@@ -16,7 +16,7 @@ class GamesCategoryViewControllerViewModel: GamesCategoryViewControllerViewModel
         return games.count
     }
     
-    func getCellViewModel(for indexPath: IndexPath) -> GameTableViewCellViewModelProtocol? {
+    func getGameCellViewModel(for indexPath: IndexPath) -> GameTableViewCellViewModelProtocol? {
         return GameTableViewCellViewModel(game: games[indexPath.row])
     }
     
@@ -34,5 +34,7 @@ class GamesCategoryViewControllerViewModel: GamesCategoryViewControllerViewModel
         games = CoreDataGameManager.shared.fetchGames()
     }
     
-    
+    func getGameViewModel(for indexPath: IndexPath) -> GameViewModelProtocol? {
+        return GameViewModel(game: games[indexPath.row])
+    }
 }

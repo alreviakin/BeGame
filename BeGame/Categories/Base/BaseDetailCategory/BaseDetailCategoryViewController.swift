@@ -9,18 +9,19 @@ import Foundation
 import UIKit
 
 class BaseDetailCategoryViewController: UIViewController {
+    var viewModel: BaseDetailCategoryViewModelProtocol?
+    
     var detailImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.layer.cornerRadius = 20
         imageView.layer.masksToBounds = true
+        imageView.contentMode = .scaleToFill
         return imageView
     }()
     
-    lazy var countCollectionCell: Int = 1
-    
     lazy var collectionView: UICollectionView = {
         let layer = UICollectionViewFlowLayout()
-        layer.itemSize = CGSize(width: (Int(view.bounds.width) - 40) / countCollectionCell, height: 70)
+        layer.itemSize = CGSize(width: (Int(view.bounds.width) - 40) / (viewModel?.countCollectionCell ?? 1), height: 70)
         layer.minimumLineSpacing = 0
         layer.minimumInteritemSpacing = 0
         layer.sectionInset = UIEdgeInsets(top: 0,
@@ -29,7 +30,8 @@ class BaseDetailCategoryViewController: UIViewController {
                                           right: 0)
         let collection = UICollectionView(frame: .zero, collectionViewLayout: layer)
         collection.isScrollEnabled = false
-//        collection.dataSource = self
+        collection.dataSource = self
+        collection.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
         return collection
     }()
     
@@ -41,8 +43,10 @@ class BaseDetailCategoryViewController: UIViewController {
         return label
     }()
     
-    var tableView: UITableView = {
+    lazy var tableView: UITableView = {
         let tableView = UITableView()
+        tableView.dataSource = self
+        tableView.delegate = self
         return tableView
     }()
     
@@ -58,25 +62,32 @@ class BaseDetailCategoryViewController: UIViewController {
         view.addSubview(collectionView)
         view.addSubview(nameStatisticLabel)
         view.addSubview(tableView)
+        
+        guard let viewModel else { return }
+        if let image = UIImage(data: viewModel.imageData) {
+            detailImageView.image = image
+        } else {
+            detailImageView.image = #imageLiteral(resourceName: "pet")
+        }
+        nameStatisticLabel.text = viewModel.nameStatistic
     }
     
     override func viewWillLayoutSubviews() {
-        detailImageView.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(10)
-            make.width.height.equalTo(view.bounds.width * 0.33)
-        }
+//        detailImageView.snp.makeConstraints { make in
+//            make.centerX.equalToSuperview()
+//            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(10)
+//            make.width.height.equalTo(view.bounds.width * 0.33)
+//        }
         collectionView.snp.makeConstraints { make in
-            make.top.equalTo(detailImageView.snp.bottom).offset(20)
             make.right.left.equalToSuperview().inset(20)
             make.height.equalTo(70)
         }
         nameStatisticLabel.snp.makeConstraints { make in
-            make.top.equalTo(collectionView.snp.bottom).offset(10)
+            make.top.equalTo(collectionView.snp.bottom).offset(0)
             make.centerX.equalToSuperview()
         }
         tableView.snp.makeConstraints { make in
-            make.top.equalTo(nameStatisticLabel.snp.bottom).offset(10)
+            make.top.equalTo(nameStatisticLabel.snp.bottom)
             make.left.right.equalToSuperview()
             make.bottom.equalToSuperview()
         }
@@ -87,14 +98,34 @@ class BaseDetailCategoryViewController: UIViewController {
     }
 }
 
+
+//MARK: - UICollectionViewDataSource
 extension BaseDetailCategoryViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return countCollectionCell
+        return viewModel?.countCollectionCell ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return UICollectionViewCell()
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
+        return cell
+    }
+}
+
+
+//MARK: - UITableViewDataSource
+extension BaseDetailCategoryViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 0
     }
     
-    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        return UITableViewCell()
+    }
+}
+
+//MARK: - UITableViewDelegate
+extension BaseDetailCategoryViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 40
+    }
 }
