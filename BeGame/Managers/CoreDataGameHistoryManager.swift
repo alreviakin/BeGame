@@ -29,7 +29,7 @@ class CoreDataGameHistoryManager {
         gameHistory.gameName = gameHistoryStruct.gameName
         gameHistory.isWin = gameHistoryStruct.isWin
         gameHistory.playerUsernames = gameHistoryStruct.playerUsernames
-        gameHistory.playerWinUsername = gameHistoryStruct.playerWinUsername
+        gameHistory.playerWinUsernames = gameHistoryStruct.playerWinUsername
         gameHistory.scoredPoints = gameHistoryStruct.scoredPoints
         gameHistory.time = gameHistoryStruct.time
         
@@ -70,7 +70,7 @@ class CoreDataGameHistoryManager {
             gameHistory.gameName = gameHistoryStruct.gameName
             gameHistory.isWin = gameHistoryStruct.isWin
             gameHistory.playerUsernames = gameHistoryStruct.playerUsernames
-            gameHistory.playerWinUsername = gameHistoryStruct.playerWinUsername
+            gameHistory.playerWinUsernames = gameHistoryStruct.playerWinUsername
             gameHistory.scoredPoints = gameHistoryStruct.scoredPoints
             gameHistory.time = gameHistoryStruct.time
         }
