@@ -19,9 +19,9 @@ extension GameHistory {
     @NSManaged public var date: Date?
     @NSManaged public var gameName: String?
     @NSManaged public var isWin: Bool
-    @NSManaged public var playerUsernames: NSObject?
-    @NSManaged public var playerWinUsernames: NSObject?
-    @NSManaged public var scoredPoints: NSObject?
+    @NSManaged public var playerUsernames: [String]?
+    @NSManaged public var playerWinUsernames: [String]?
+    @NSManaged public var scoredPoints: [String : Int32]?
     @NSManaged public var time: Int32
 
 }

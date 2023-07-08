@@ -12,7 +12,7 @@ struct GameHistoryStruct {
     var gameName: String
     var isWin: Bool
     var playerUsernames: [String]
-    var playerWinUsername: String?
+    var playerWinUsername: [String]?
     var scoredPoints: [String: Int32]?
     var time: Int32
 }
