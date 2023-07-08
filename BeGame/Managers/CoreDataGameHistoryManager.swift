@@ -51,6 +51,17 @@ class CoreDataGameHistoryManager {
         }
     }
     
+    func fetchGameHistories(game: Game) -> [GameHistory]? {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "GameHistory")
+        do {
+            guard let gameHistory = try? context.fetch(fetchRequest) as? [GameHistory] else { return nil}
+            return gameHistory.filter { $0.gameName == game.name }.sorted(by: { firstGameHistory, SecondGameHistory in
+                guard let firstDate = firstGameHistory.date, let secondDate = SecondGameHistory.date else { return false}
+                return firstDate < secondDate
+            })
+        }
+    }
+    
     func updateGame(gameHistoryStruct: GameHistoryStruct) {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "GameHistory")
         do {
