@@ -6,3 +6,14 @@
 //
 
 import Foundation
+
+class PlayerCollectionCellViewModel: PlayerCollectionCellViewModelProtocol {
+    var count: String
+    
+    var name: String
+    
+    init(name: String, count: String) {
+        self.count = count
+        self.name = name
+    }
+}

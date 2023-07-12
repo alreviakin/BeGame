@@ -34,4 +34,7 @@ class PlayersCategoryViewControllerViewModel: PlayersCategoryViewControllerViewM
         players = CoreDataPlayerManager.shared.fetchPlayers()
     }
     
+    func getPlayerViewModel(for indexPath: IndexPath) -> PlayerViewModelProtocol? {
+        return PlayerViewModel(player: players[indexPath.row])
+    }
 }

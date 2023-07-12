@@ -6,3 +6,13 @@
 //
 
 import Foundation
+
+class PlayerCollectoionCell: BaseDetailCollectionCell {
+    var viewModel: PlayerCollectionCellViewModelProtocol? {
+        didSet {
+            guard let viewModel else { return }
+            countLabel.text = viewModel.count
+            nameLabel.text = viewModel.name
+        }
+    }
+}

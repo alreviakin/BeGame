@@ -12,5 +12,7 @@ protocol PlayersCategoryViewControllerViewModelProtocol {
     func numberOfRows() -> Int
     func cellViewModel(for indexPath: IndexPath) -> PlayerTableViewCellViewModelProtocol?
     func isLastCell(for indexPath: IndexPath) -> Bool
-    func savePlayer(player: PlayerStruct) 
+    func savePlayer(player: PlayerStruct)
+    
+    func getPlayerViewModel(for indexPath: IndexPath) -> PlayerViewModelProtocol?
 }

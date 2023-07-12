@@ -12,7 +12,7 @@ class PlayGameViewModel: PlayGameViewModelProtocol {
     
     var scoredPoints: [String : Int32]?
     
-    var playerWin: Player?
+    var playersWin: [String]?
     
     var game: Game
     
@@ -32,6 +32,13 @@ class PlayGameViewModel: PlayGameViewModelProtocol {
         self.game = game
         self.players = players
         self.countTime = 0
+        guard let typeGame = GameType(rawValue: game.type) else { return }
+        if typeGame == .scoring {
+            self.scoredPoints = [:]
+            for player in players {
+                scoredPoints?[player.username] = 0
+            }
+        }
     }
     
     func getGameImage() -> Data {
@@ -42,21 +49,7 @@ class PlayGameViewModel: PlayGameViewModelProtocol {
     
     func updateTime() -> String {
         countTime += 1
-        let hours = countTime / 3600
-        let minutes = countTime / 60 % 60
-        let seconds = countTime % 60
-        
-        var times: [String] = []
-        if hours > 0 {
-          times.append("\(hours)h")
-        }
-        if minutes > 0 {
-          times.append("\(minutes)m")
-        }
-        if hours == 0 {
-            times.append("\(seconds)s")
-        }
-        return times.joined(separator: " ")
+        return DateManager.shared.intToTimeString(countTime: countTime)
     }
     
     func addTime(seconds: Int) {
@@ -89,18 +82,39 @@ class PlayGameViewModel: PlayGameViewModelProtocol {
         return cellViewModel
     }
     
+    //MARK: - CoreData
+    
     func getGameHistoryStruct() -> GameHistoryStruct {
         var playerUsernames: [String] = []
         for player in players {
             playerUsernames.append(player.username)
+        }
+        if game.type == GameType.scoring.rawValue {
+            getWinPlayer()
         }
         return GameHistoryStruct(
             date: DateManager.shared.getCurrentDate(),
             gameName: game.name,
             isWin: isWin,
             playerUsernames: playerUsernames,
-            playerWinUsername: playerWin?.username,
+            playerWinUsername: playersWin,
             scoredPoints: scoredPoints,
             time: Int32(countTime))
+    }
+    
+    func changePoints(for index: Int, with points: String) {
+        guard let pointsInt = Int32(points) else { return }
+        scoredPoints?[players[index].username] = pointsInt
+    }
+    
+    func getWinPlayer() {
+        guard let scoredPoints else { return }
+        playersWin = []
+        let max = scoredPoints.values.max()
+        for player in players {
+            if scoredPoints[player.username] == max {
+                playersWin?.append(player.username)
+            }
+        }
     }
 }

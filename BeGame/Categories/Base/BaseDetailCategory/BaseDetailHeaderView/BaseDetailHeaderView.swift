@@ -23,7 +23,7 @@ class BaseDetailHeaderView: UIView {
     
     var nameLabel: UILabel = {
        let label = UILabel()
-        
+        label.font = UIFont.systemFont(ofSize: 12, weight: .bold)
         label.numberOfLines = 0
         return label
     }()
@@ -31,30 +31,34 @@ class BaseDetailHeaderView: UIView {
     var gameLabel: UILabel = {
        let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 12, weight: .bold)
+        label.textAlignment = .center
         return label
     }()
     
     var winLabel: UILabel = {
        let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 12, weight: .bold)
+        label.textAlignment = .center
         return label
     }()
     
     var averagePointLabel: UILabel = {
        let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 12, weight: .bold)
+        label.textAlignment = .center
         return label
     }()
     
     var bestPointLabel: UILabel = {
        let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 12, weight: .bold)
+        label.textAlignment = .center
         return label
     }()
     lazy var horizontalStack: UIStackView = {
        let stack = UIStackView(arrangedSubviews: labelViews)
         stack.axis = .horizontal
-        stack.distribution = .equalSpacing
+        stack.distribution = .equalCentering
         return stack
     }()
     lazy var labelViews: [UILabel] = [gameLabel, winLabel, averagePointLabel, bestPointLabel]

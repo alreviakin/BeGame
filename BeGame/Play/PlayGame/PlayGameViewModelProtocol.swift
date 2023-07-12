@@ -16,7 +16,7 @@ protocol PlayGameViewModelProtocol {
     
     var isWin: Bool { get set }
     
-    var playerWin: Player? { get }
+    var playersWin: [String]? { get }
     
     var scoredPoints: [String: Int32]? { get }
     
@@ -41,4 +41,8 @@ protocol PlayGameViewModelProtocol {
     //MARK: - CoreData
     
     func getGameHistoryStruct() -> GameHistoryStruct
+    
+    func changePoints(for index: Int, with points: String)
+    
+    func getWinPlayer()
 }

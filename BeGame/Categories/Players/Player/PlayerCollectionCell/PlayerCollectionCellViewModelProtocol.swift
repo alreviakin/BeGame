@@ -6,3 +6,8 @@
 //
 
 import Foundation
+
+protocol PlayerCollectionCellViewModelProtocol {
+    var count: String { get }
+    var name: String { get }
+}

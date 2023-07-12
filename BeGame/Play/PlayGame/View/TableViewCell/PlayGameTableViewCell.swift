@@ -19,6 +19,8 @@ class PlayGameTableViewCell: UITableViewCell {
         }
     }
     
+    weak var delegate: PlayGameViewControllerDelegate?
+    
     private var nameLabel: UILabel = {
        let label = UILabel()
         label.textAlignment = .center
@@ -85,5 +87,7 @@ extension PlayGameTableViewCell: UITextFieldDelegate {
         if textField.text == "" {
             textField.text = "0"
         }
+        guard let text = textField.text else { return }
+        delegate?.changePoints(for: textField.tag, with: text)
     }
 }

@@ -88,7 +88,7 @@ extension GameViewModel {
         switch gameType {
         case .scoring:
             for game in gameHistory {
-                guard let playerUsernames = game.playerUsernames else { continue }
+                let playerUsernames = game.playerUsernames
                 for playerUsername in playerUsernames {
                     guard let playerName = CoreDataPlayerManager.shared.fetchPlayer(username: playerUsername)?.name else { continue }
                     let countPoints = Int(game.scoredPoints?[playerUsername] ?? 0)
@@ -121,7 +121,7 @@ extension GameViewModel {
         default:
             print(gameType)
             for game in gameHistory {
-                guard let playerUsernames = game.playerUsernames else { continue }
+                let playerUsernames = game.playerUsernames
                 for playerUsername in playerUsernames {
                     guard let playerName = CoreDataPlayerManager.shared.fetchPlayer(username: playerUsername)?.name else { continue }
                     let isWin = game.isWin

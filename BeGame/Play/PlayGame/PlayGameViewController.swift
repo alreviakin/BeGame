@@ -6,6 +6,11 @@
 //
 
 import UIKit
+
+protocol PlayGameViewControllerDelegate: AnyObject {
+    func changePoints(for index: Int, with points: String)
+}
+
 class PlayGameViewController: UIViewController {
     private var appDidEnterBackgroundDate: Date?
     
@@ -48,6 +53,14 @@ class PlayGameViewController: UIViewController {
         return table
     }()
 
+    private lazy var winButton: UIButton = {
+        let button = UIButton()
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 25)
+        button.titleLabel?.textAlignment = .center
+        button.addTarget(self, action: #selector(changeWinButtonTap), for: .touchUpInside)
+        return button
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configure()
@@ -69,6 +82,7 @@ class PlayGameViewController: UIViewController {
         
         view.addSubview(scrollView)
         scrollView.addSubview(gameImageView)
+        scrollView.addSubview(winButton)
         scrollView.addSubview(collection)
         scrollView.addSubview(playerTableView)
         createTimer()
@@ -87,8 +101,12 @@ class PlayGameViewController: UIViewController {
             make.width.height.equalTo(view.bounds.width * 0.33)
             make.centerX.equalToSuperview()
         }
+        winButton.snp.makeConstraints { make in
+            make.top.equalTo(gameImageView.snp.bottom).offset(10)
+            make.centerX.equalToSuperview()
+        }
         collection.snp.makeConstraints { make in
-            make.top.equalTo(gameImageView.snp.bottom).offset(20)
+            make.top.equalTo(winButton.snp.bottom).offset(20)
             make.left.equalTo(view).offset(40)
             make.right.equalTo(view).offset(-40)
             make.height.equalTo(80)
@@ -115,6 +133,7 @@ extension PlayGameViewController: UITableViewDataSource {
         }
         cell.viewModel = cellViewModel
         cell.textField.tag = indexPath.row
+        cell.delegate = self
         return cell
     }
     
@@ -216,12 +235,14 @@ extension PlayGameViewController {
     func showAlert() {
         let alert = UIAlertController(title: "Вы победили?", message: nil, preferredStyle: .alert)
         let alertOkAction = UIAlertAction(title: "Да", style: .default) {_ in
-            self.changeBarButonItem()
             self.viewModel?.isWin = true
+            self.changeWinButton()
+            self.changeBarButonItem()
         }
         let alertCancelAction = UIAlertAction(title: "Нет", style: .cancel) {_ in
-            self.changeBarButonItem()
             self.viewModel?.isWin = false
+            self.changeWinButton()
+            self.changeBarButonItem()
         }
         alert.addAction(alertCancelAction)
         alert.addAction(alertOkAction)
@@ -234,8 +255,34 @@ extension PlayGameViewController {
         timer = nil
     }
     
+    private func changeWinButton() {
+        guard let viewModel else { return }
+        guard let typeGame = GameType(rawValue: viewModel.game.type) else { return }
+        if typeGame == .cooperative {
+            if viewModel.isWin {
+                winButton.setTitle("Победа", for: .normal)
+                winButton.setTitleColor(R.Color.blue, for: .normal)
+            } else {
+                winButton.setTitle("Поражение", for: .normal)
+                winButton.setTitleColor(R.Color.darkYellow, for: .normal)
+            }
+        }
+    }
+    
+    @objc func changeWinButtonTap() {
+        viewModel?.isWin.toggle()
+        changeWinButton()
+    }
+    
     @objc private func saveGame() {
         guard let viewModel else { return }
         CoreDataGameHistoryManager.shared.createGameHistory(gameHistoryStruct: viewModel.getGameHistoryStruct())
+        navigationController?.popToRootViewController(animated: true)
+    }
+}
+
+extension PlayGameViewController: PlayGameViewControllerDelegate {
+    func changePoints(for index: Int, with points: String) {
+        viewModel?.changePoints(for: index, with: points)
     }
 }

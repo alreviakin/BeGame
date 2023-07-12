@@ -47,7 +47,12 @@ extension PlayersCategoryViewController {
 
 //MARK: - TableViewDelegate
 extension PlayersCategoryViewController {
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = PlayerViewController()
+        let playerViewModel = viewModel?.getPlayerViewModel(for: indexPath)
+        vc.viewModel = playerViewModel
+        navigationController?.pushViewController(vc, animated: true)
+    }
 }
 
 //MARK: - Actions
