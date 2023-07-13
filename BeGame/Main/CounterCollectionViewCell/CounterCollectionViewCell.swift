@@ -11,6 +11,7 @@ class CounterCollectionViewCell: UICollectionViewCell {
     
     private var countLabel: UILabel = {
        let label = UILabel()
+        label.textColor = .black
         label.textAlignment = .center
         label.font = UIFont.boldSystemFont(ofSize: 25)
         return label

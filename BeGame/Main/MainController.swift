@@ -15,6 +15,7 @@ class MainController: UIViewController {
         layout.minimumLineSpacing = 0
         layout.minimumInteritemSpacing = 0
         let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collection.backgroundColor = .white
         collection.dataSource = self
         collection.register(CounterCollectionViewCell.self, forCellWithReuseIdentifier: "CollectionCell")
         collection.isScrollEnabled = false
@@ -22,6 +23,7 @@ class MainController: UIViewController {
     }()
     private lazy var tableView: UITableView = {
        let tableView = UITableView()
+        tableView.backgroundColor = .white
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(CategoryTableViewCell.self, forCellReuseIdentifier: "TableCell")
