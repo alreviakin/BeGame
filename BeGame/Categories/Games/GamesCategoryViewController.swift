@@ -48,6 +48,17 @@ extension GamesCategoryViewController {
         vc.viewModel = viewModel?.getGameViewModel(for: indexPath)
         navigationController?.pushViewController(vc, animated: true)
     }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let action = UIContextualAction(style: .destructive, title: "delete") { action, view, completion in
+            self.viewModel?.deleteGame(for: indexPath)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            completion(true)
+        }
+        action.backgroundColor = .red
+        action.image = UIImage(systemName: "xmark")
+        return UISwipeActionsConfiguration(actions: [action])
+    }
 }
 
 //MARK: - Transition

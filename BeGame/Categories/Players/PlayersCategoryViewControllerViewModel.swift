@@ -37,4 +37,9 @@ class PlayersCategoryViewControllerViewModel: PlayersCategoryViewControllerViewM
     func getPlayerViewModel(for indexPath: IndexPath) -> PlayerViewModelProtocol? {
         return PlayerViewModel(player: players[indexPath.row])
     }
+    
+    func deletePlayer(for indexPath: IndexPath) {
+        CoreDataPlayerManager.shared.deletePlayer(username: players[indexPath.row].username)
+        players.remove(at: indexPath.row)
+    }
 }

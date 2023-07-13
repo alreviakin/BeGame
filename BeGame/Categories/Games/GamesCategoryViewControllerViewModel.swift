@@ -37,4 +37,9 @@ class GamesCategoryViewControllerViewModel: GamesCategoryViewControllerViewModel
     func getGameViewModel(for indexPath: IndexPath) -> GameViewModelProtocol? {
         return GameViewModel(game: games[indexPath.row])
     }
+    
+    func deleteGame(for indexPath: IndexPath) {
+        CoreDataGameManager.shared.deleteGame(name: games[indexPath.row].name)
+        games.remove(at: indexPath.row)
+    }
 }

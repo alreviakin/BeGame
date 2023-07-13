@@ -53,6 +53,17 @@ extension PlayersCategoryViewController {
         vc.viewModel = playerViewModel
         navigationController?.pushViewController(vc, animated: true)
     }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let action = UIContextualAction(style: .destructive, title: "delete") { action, view, completion in
+            self.viewModel?.deletePlayer(for: indexPath)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            completion(true)
+        }
+        action.image = UIImage(systemName: "xmark")
+        action.backgroundColor = .red
+        return UISwipeActionsConfiguration(actions: [action])
+    }
 }
 
 //MARK: - Actions

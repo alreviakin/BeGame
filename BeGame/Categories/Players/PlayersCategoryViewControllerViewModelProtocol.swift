@@ -15,4 +15,5 @@ protocol PlayersCategoryViewControllerViewModelProtocol {
     func savePlayer(player: PlayerStruct)
     
     func getPlayerViewModel(for indexPath: IndexPath) -> PlayerViewModelProtocol?
+    func deletePlayer(for indexPath: IndexPath)
 }

@@ -15,4 +15,5 @@ protocol GamesCategoryViewControllerViewModelProtocol {
     func saveGame(game: GameStruct)
     
     func getGameViewModel(for indexPath: IndexPath) -> GameViewModelProtocol?
+    func deleteGame(for indexPath: IndexPath)
 }
