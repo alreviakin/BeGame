@@ -10,6 +10,7 @@ import UIKit
 class BaseCategoryViewController: UIViewController {
     lazy var tableView: UITableView = {
        let table = UITableView()
+        table.backgroundColor = .white
         table.dataSource = self
         table.delegate = self
         return table

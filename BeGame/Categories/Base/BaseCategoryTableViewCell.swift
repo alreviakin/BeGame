@@ -16,6 +16,7 @@ class BaseCategoryTableViewCell: UITableViewCell {
     }()
     var nameLabel: UILabel = {
        let label = UILabel()
+        label.textColor = .black
         label.font =  UIFont.systemFont(ofSize: 20, weight: .bold)
         return label
     }()
