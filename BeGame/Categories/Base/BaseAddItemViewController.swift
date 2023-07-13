@@ -25,11 +25,16 @@ class BaseAddItemViewController: UIViewController {
     }()
     lazy var nameTextField: UITextField = {
        let textField = UITextField()
+        textField.textColor = .black
+        textField.tintColor = .red
         textField.layer.cornerRadius = 10
         textField.layer.masksToBounds = true
         textField.layer.borderWidth = 0.5
         textField.layer.borderColor = R.Color.separator.cgColor
-        textField.placeholder = "Введите имя"
+        textField.attributedPlaceholder = NSAttributedString(
+            string: "Введите имя",
+            attributes: [NSAttributedString.Key.foregroundColor: R.Color.separator]
+        )
         textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 0))
         textField.leftViewMode = .always
         textField.delegate = self
