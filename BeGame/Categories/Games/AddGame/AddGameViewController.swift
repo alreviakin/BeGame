@@ -19,6 +19,7 @@ class AddGameViewController: BaseAddItemViewController {
         layout.minimumLineSpacing = 8
         layout.minimumInteritemSpacing = 2
         let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collection.backgroundColor = .white
         collection.dataSource = self
         collection.delegate = self
         collection.register(GameTypeCell.self, forCellWithReuseIdentifier: "CollectionCell")
